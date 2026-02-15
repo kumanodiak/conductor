@@ -57,10 +57,10 @@
 
         default_win {
             bindings = <
-&trans  &trans        &trans  &trans           &trans                       &trans           &trans  &trans  &trans  &trans
-&trans  &trans        &trans  &trans           &trans                       &trans           &trans  &trans  &trans  &mt LEFT_GUI MINUS
-&trans  &trans        &trans  &trans           &trans                       &trans           &trans  &trans  &trans  &trans
-&trans  &kp LEFT_GUI  &trans  &mt LCTRL LANG2  &lt 7 SPACE  &trans  &trans  &mt RCTRL LANG1                  &trans  &kp LC(LS(M))
+&trans  &trans        &trans  &trans           &trans                            &trans           &trans  &trans  &trans  &trans
+&trans  &trans        &trans  &trans           &trans                            &trans           &trans  &trans  &trans  &mt LEFT_GUI MINUS
+&trans  &trans        &trans  &trans           &trans                            &trans           &trans  &trans  &trans  &trans
+&trans  &kp LEFT_GUI  &trans  &mt LCTRL LANG2  &lt 7 SPACE  &trans  &lt 8 ENTER  &mt RCTRL LANG1                  &trans  &kp LC(LS(M))
             >;
         };
 
