@@ -67,7 +67,7 @@
         function_mac {
             bindings = <
 &kp EXCLAMATION       &kp AT_SIGN     &kp HASH        &kp DOLLAR  &kp PERCENT                  &kp CARET  &kp AMPERSAND  &kp ASTERISK  &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS
-&kp LS(LG(NUMBER_3))  &kp LG(LS(V))   &kp LG(V)       &kp LG(C)   &kp LG(X)                    &kp LBKT   &kp RBKT       &kp BSLH      &kp EQUAL             &kp NON_US_BACKSLASH
+&kp LS(LG(NUMBER_3))  &kp LG(LS(V))   &kp LG(V)       &kp LG(C)   &kp LG(X)                    &kp LBKT   &kp RBKT       &kp BSLH      &kp EQUAL             &trans
 &trans                &kp LG(LS(N4))  &kp LG(LS(N5))  &trans      &trans                       &kp SEMI   &kp SEMI       &kp APOS      &kp APOS              &kp GRAVE
 &kp ESCAPE            &trans          &trans          &trans      &trans       &mo 11  &trans  &trans                                  &trans                &trans
             >;
@@ -100,7 +100,7 @@
             >;
         };
 
-        ARROW {
+        move_mac {
             bindings = <
 &trans  &trans  &kp LS(LC(NUMBER_1))  &kp LS(LC(NUMBER_2))  &kp LS(LC(NUMBER_3))                  &kp LC(UP_ARROW)  &kp LC(LEFT_ARROW)  &kp UP_ARROW    &kp LC(RIGHT)    &kp LC(DOWN_ARROW)
 &trans  &trans  &kp LS(LC(NUMBER_4))  &kp LS(LC(N5))        &kp LS(LC(NUMBER_6))                  &kp LC(A)         &kp LEFT_ARROW      &kp DOWN_ARROW  &kp RIGHT_ARROW  &kp LC(E)
@@ -109,6 +109,15 @@
             >;
 
             sensor-bindings = <&inc_dec_kp LC(PAGE_UP) LC(PAGE_DOWN)>;
+        };
+
+        function_win {
+            bindings = <
+&kp EXCLAMATION  &kp AT_SIGN    &kp HASH   &kp DOLLAR  &kp PERCENT                  &kp CARET  &kp AMPERSAND  &kp ASTERISK  &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS
+&kp LG(V)        &kp LS(LC(V))  &kp LC(V)  &kp LC(C)   &kp LC(X)                    &kp LBKT   &kp RBKT       &kp BSLH      &kp EQUAL             &trans
+&trans           &kp LG(LS(S))  &trans     &trans      &trans                       &kp SEMI   &kp SEMI       &kp APOS      &kp APOS              &kp GRAVE
+&kp ESCAPE       &trans         &trans     &trans      &trans       &mo 11  &trans  &trans                                  &trans                &trans
+            >;
         };
 
         layer_8 {
@@ -130,15 +139,6 @@
         };
 
         layer_10 {
-            bindings = <
-&trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans                  &trans  &trans
-            >;
-        };
-
-        layer_11 {
             bindings = <
 &trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &trans  &trans
