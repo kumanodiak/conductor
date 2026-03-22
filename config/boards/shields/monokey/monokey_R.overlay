@@ -38,7 +38,19 @@
     trackball_listener {
         compatible = "zmk,input-listener";
         device = <&trackball>;
-        input-processors = <&zip_temp_layer 4 100000>; // AML
+
+        /* ベース: オートマウスレイヤー (AML)
+         * トラックボール操作時にレイヤー4 (MOUSE) を自動有効化
+         * 100000ms (100秒) のタイムアウトで自動解除 */
+        input-processors = <&zip_temp_layer 4 100000>;
+
+        /* スクロールレイヤー: レイヤー5 (SCROLL) がアクティブ時
+         * XY移動をスクロールホイールに変換
+         * スクロール速度をスケーリング (1/8) で調整 */
+        scroll_layer {
+            layers = <5>;
+            input-processors = <&zip_xy_to_scroll_mapper &zip_scroll_scaler 1 8>;
+        };
     };
 
     chg_stat: chg_stat {
