@@ -4,8 +4,8 @@ manifest:
       url-base: https://github.com/zmkfirmware
     - name: badjeff
       url-base: https://github.com/badjeff
-    - name: caksoylar
-      url-base: https://github.com/caksoylar
+    - name: pite1222
+      url-base: https://github.com/pite1222
     - name: 4mplelab
       url-base: https://github.com/4mplelab
   projects:
@@ -17,8 +17,8 @@ manifest:
       remote: badjeff
       revision: main
     - name: zmk-rgbled-widget
-      remote: caksoylar
-      revision: main
+      remote: pite1222
+      revision: critical-steady-light-zephyr41
     - name: zmk-feature-charge-indicator
       remote: 4mplelab
       revision: main
