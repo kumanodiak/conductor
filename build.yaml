@@ -21,7 +21,10 @@ include:
   - board: xiao_ble//zmk
     shield: monokey_R rgbled_adapter
     snippet: studio-rpc-usb-uart
+    artifact-name: monokey_R-rgbled_adapter-xiao_ble-zmk
   - board: xiao_ble//zmk
     shield: monokey_L rgbled_adapter
+    artifact-name: monokey_L-rgbled_adapter-xiao_ble-zmk
   - board: xiao_ble//zmk
     shield: settings_reset
+    artifact-name: settings_reset-xiao_ble-zmk
