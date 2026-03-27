@@ -104,9 +104,11 @@ jobs:
           mkdir build/artifacts
           if [ -f "build/zephyr/zmk.uf2" ]; then
             artifact_name="${{ matrix.artifact-name || format('{0}{1}', matrix.shield && format('{0}-', matrix.shield) || '', matrix.board) }}"
+            artifact_name=$(echo "${artifact_name}" | tr '/' '-' | tr ' ' '_')
             cp "build/zephyr/zmk.uf2" "build/artifacts/${artifact_name}.uf2"
           elif [ -f "build/zephyr/zmk.bin" ]; then
             artifact_name="${{ matrix.artifact-name || format('{0}{1}', matrix.shield && format('{0}-', matrix.shield) || '', matrix.board) }}"
+            artifact_name=$(echo "${artifact_name}" | tr '/' '-' | tr ' ' '_')
             cp "build/zephyr/zmk.bin" "build/artifacts/${artifact_name}.bin"
           fi
 
