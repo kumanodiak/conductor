@@ -31,9 +31,15 @@
             timeout-ms = <50>;
         };
 
-        combo_nvee3u {
+        pair {
             bindings = <&mkp MB5>;
             key-positions = <0 10 20>;
+            timeout-ms = <50>;
+        };
+
+        boot {
+            bindings = <&bootloader>;
+            key-positions = <8 24 4>;
             timeout-ms = <50>;
         };
 
