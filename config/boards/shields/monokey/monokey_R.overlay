@@ -36,12 +36,13 @@
 
 
 / {
-    /* Vertical-only scroll mapper: Y → WHEEL, X is dropped */
-    zip_y_to_scroll_mapper: zip_y_to_scroll_mapper {
-        compatible = "zmk,input-processor-code-mapper";
-        #input-processor-cells = <0>;
+    /* Reduce horizontal scroll sensitivity to prevent accidental triggering */
+    hwheel_scaler: hwheel_scaler {
+        compatible = "zmk,input-processor-scaler";
+        #input-processor-cells = <2>;
         type = <INPUT_EV_REL>;
-        map = <INPUT_REL_Y INPUT_REL_WHEEL>;
+        codes = <INPUT_REL_HWHEEL>;
+        track-remainders;
     };
 
     trackball_listener {
@@ -58,7 +59,7 @@
          * スクロール速度をスケーリング (1/8) で調整 */
         scroll_layer {
             layers = <5>;
-            input-processors = <&zip_y_to_scroll_mapper &zip_scroll_transform INPUT_TRANSFORM_Y_INVERT &zip_scroll_scaler 1 16 &zip_scroll_scaler 1 2 &studio_scroll_scaler>;
+            input-processors = <&zip_xy_to_scroll_mapper &zip_scroll_transform INPUT_TRANSFORM_Y_INVERT &zip_scroll_scaler 1 16 &zip_scroll_scaler 1 2 &studio_scroll_scaler &hwheel_scaler 1 4>;
         };
     };
 
