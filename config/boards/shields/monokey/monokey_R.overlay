@@ -30,8 +30,10 @@
         17 // K
         18 // L
     >;
-    require-prior-idle-ms = <750>;
-    // トラボ誤爆防止: タイピング後750ms経過しないとAMLが発動しない
+    require-prior-idle-ms = <500>;
+    // トラボ誤爆防止: タイピング後500ms経過しないとAMLが発動しない
+    require-prior-motion = <15>;
+    // モーション閾値: 累積移動量15未満ではAMLが発動しない（振動フィルタ）
 };
 
 
