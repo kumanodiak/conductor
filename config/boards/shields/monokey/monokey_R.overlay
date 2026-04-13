@@ -30,8 +30,8 @@
         17 // K
         18 // L
     >;
-    require-prior-idle-ms = <500>;
-    // トラボ誤爆防止: タイピング後500ms経過しないとAMLが発動しない
+    require-prior-idle-ms = <750>;
+    // トラボ誤爆防止: タイピング後750ms経過しないとAMLが発動しない
 };
 
 
@@ -105,6 +105,7 @@
         spi-max-frequency = <2000000>;
         irq-gpios = <&gpio0 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
         cpi = <800>;
+        force-awake;
         evt-type = <INPUT_EV_REL>;
         x-input-code = <INPUT_REL_X>;
         y-input-code = <INPUT_REL_Y>;
