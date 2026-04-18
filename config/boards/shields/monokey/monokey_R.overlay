@@ -32,7 +32,7 @@
     >;
     require-prior-idle-ms = <750>;
     // トラボ誤爆防止: タイピング後750ms経過しないとAMLが発動しない
-    require-prior-motion = <80>;
+    require-prior-motion = <50>;
     // モーション閾値: 累積移動量500未満ではAMLが発動しない（振動フィルタ）
 };
 
