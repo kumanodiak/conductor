@@ -32,8 +32,8 @@
     >;
     require-prior-idle-ms = <300>;
     // タイピング後300ms経過でAMLが発動可能（100msだとsplit BLE通信ラグが顕著、750msだと反応鈍い）
-    require-prior-motion = <30>;
-    // モーション閾値30: 軽くトラックボール触るだけで発動、タイピング振動は依然フィルタ
+    require-prior-motion = <50>;
+    // モーション閾値50（元の値）: motion下げ(30)はAML発動頻度を増やしsplit BLEラグを悪化させると Codex が指摘、元に戻す
 };
 
 
