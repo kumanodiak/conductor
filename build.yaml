@@ -20,7 +20,12 @@
 include:
   - board: xiao_ble//zmk
     shield: monokey_R rgbled_adapter
-    snippet: studio-rpc-usb-uart
+    # v0.4.8 TEST: drop studio-rpc-usb-uart snippet to disable USB CDC ACM.
+    # Hypothesis: USB CDC polling/interrupt on R central contributes to the
+    # USB-connected typing lag (L->R order swap, ~200ms observed).
+    # USB HID still works (CONFIG_ZMK_USB=y from board defconfig). Studio
+    # connects over BLE only via CONFIG_ZMK_STUDIO_TRANSPORT_BLE=y.
+    # Debug variant below keeps both snippets for USB CDC logging.
     artifact-name: monokey_R-rgbled_adapter-xiao_ble-zmk
   - board: xiao_ble//zmk
     shield: monokey_L rgbled_adapter
