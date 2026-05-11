@@ -84,10 +84,11 @@ static const struct device *ledr_dev, *ledg_dev, *ledb_dev;
 #endif
 static struct gpio_callback chg_cb;
 
-/* Debounce work for chg_handler — must be deferred from IRQ context (k_sleep
- * inside the GPIO callback is illegal in Zephyr and causes kernel panic /
- * silent halt, which is exactly the battery-only hang we've been chasing). */
-static struct k_work_delayable chg_debounce_work;
+/* No debounce work: chg_handler runs directly in IRQ context.
+ * gpio_pin_get_raw / atomic_set / gpio_pin_set are all ISR-safe (spinlock).
+ * This matches v0.4.6 behaviour where k_sleep was a silent no-op in IRQ
+ * context (asserts disabled), keeping all chg logic out of system workqueue
+ * and eliminating potential competition with ZMK BLE TX work items. */
 
 /* Maintenance thread: reapply charging state periodically to suppress widget while charging. */
 K_THREAD_STACK_DEFINE(chg_maint_stack, 512);
@@ -211,24 +212,15 @@ static void apply_state(void)
 #endif
 }
 
-/* Debounce work handler: runs in system workqueue (NOT IRQ context),
- * safe to do GPIO reads and state updates here. */
-static void chg_debounce_work_handler(struct k_work *work)
+/* IRQ handler: run directly in IRQ context (v0.4.6-style).
+ * gpio_pin_get_raw, atomic_set, gpio_pin_set are ISR-safe.
+ * No debounce delay — matches v0.4.6 where k_sleep was a no-op in IRQ.
+ * Avoids system workqueue competition with ZMK BLE TX work items. */
+static void chg_handler(const struct device *port, struct gpio_callback *cb, uint32_t pins)
 {
     bool charging = read_charging();
     atomic_set(&is_charging, charging);
     apply_state();
-}
-
-/* IRQ handler: defer everything to a delayable work to leave IRQ context.
- * (Previously this called k_sleep(K_MSEC(8)) inside the IRQ callback, which
- * is illegal in Zephyr — caused __ASSERT failure / kernel panic / silent halt
- * once a STAT pin edge fired on battery operation. That was the root cause of
- * the 30~60min hang reproduced across all v0.4.x builds.) */
-static void chg_handler(const struct device *port, struct gpio_callback *cb, uint32_t pins)
-{
-    /* Defer to system workqueue with 8ms debounce — runs in thread context. */
-    k_work_reschedule(&chg_debounce_work, K_MSEC(8));
 }
 
 /* Battery state changed event handler: refresh low-battery flag and reapply. */
@@ -344,9 +336,6 @@ static int charge_indicator_init(void)
     update_low_battery();
 #endif
     apply_state();
-
-    /* Initialize debounce work for IRQ context offloading. */
-    k_work_init_delayable(&chg_debounce_work, chg_debounce_work_handler);
 
     /* IRQ on both edges. */
     ret = gpio_pin_interrupt_configure(chg_dev, CHG_PIN_NUM, GPIO_INT_EDGE_BOTH);
