@@ -323,20 +323,13 @@ void update_layer_color(void) {
     uint8_t color = layer_color_idx[index];
     bool is_flash = (CONFIG_RGBLED_WIDGET_LAYER_FLASH_MASK & BIT(index)) && color != 0;
 
-    // Track last flash layer to avoid re-flashing when returning from a
-    // temporary layer (e.g. auto-mouse) back to the same base layer.
-    static uint8_t last_flash_layer = UINT8_MAX;
-
     if (is_flash) {
-        if (last_flash_layer != index) {
-            last_flash_layer = index;
-            led_layer_color = 0;
-            struct blink_item flash = {.color = color,
-                                       .duration_ms = CONFIG_RGBLED_WIDGET_LAYER_FLASH_MS};
-            LOG_INF("Flash %dms %s for layer %d", CONFIG_RGBLED_WIDGET_LAYER_FLASH_MS,
-                    color_names[color], index);
-            k_msgq_put(&led_msgq, &flash, K_NO_WAIT);
-        }
+        led_layer_color = 0;
+        struct blink_item flash = {.color = color,
+                                   .duration_ms = CONFIG_RGBLED_WIDGET_LAYER_FLASH_MS};
+        LOG_INF("Flash %dms %s for layer %d", CONFIG_RGBLED_WIDGET_LAYER_FLASH_MS,
+                color_names[color], index);
+        k_msgq_put(&led_msgq, &flash, K_NO_WAIT);
     } else {
         if (led_layer_color != color) {
             led_layer_color = color;
