@@ -30,8 +30,9 @@
         17 // K
         18 // L
     >;
-    require-prior-idle-ms = <300>;
-    // タイピング後300ms経過でAMLが発動可能（100msだとsplit BLE通信ラグが顕著、750msだと反応鈍い）
+    require-prior-idle-ms = <750>;
+    // v0.4.6 behavior: delay AML after typing to reduce trackball-triggered input load.
+    // This is intentionally slower than 300ms for hang isolation.
     require-prior-motion = <50>;
     // モーション閾値50（元の値）: motion下げ(30)はAML発動頻度を増やしsplit BLEラグを悪化させると Codex が指摘、元に戻す
 };
