@@ -126,6 +126,14 @@ config RGBLED_WIDGET_LAYER_DEBOUNCE_MS
 config RGBLED_WIDGET_SHOW_LAYER_COLORS
     bool "Use custom colors for layers"
 
+config RGBLED_WIDGET_LAYER_FLASH_MASK
+    int "Bitmask of layers that flash briefly on activation then turn off (0=disabled)"
+    default 0
+
+config RGBLED_WIDGET_LAYER_FLASH_MS
+    int "Flash duration in ms for layers in LAYER_FLASH_MASK"
+    default 5000
+
 config RGBLED_WIDGET_LAYER_0_COLOR
     int "Color to use for the base layer"
     range 0 7
